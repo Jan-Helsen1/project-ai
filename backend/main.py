@@ -19,7 +19,7 @@ def get_users():
 def add_user():
     data = request.get_json()
     response = supabase.table("user").insert(data).execute()
-    return jsonify(data)
+    return jsonify(response.data)
 
 @app.route("/user/getwithemail", methods=["POST"])
 def get_user_with_email():
@@ -31,6 +31,40 @@ def get_user_with_email():
 def login():
     data = request.get_json()
     response = supabase.table("user").select("*").eq("email", data["email"]).eq("password", data["password"]).execute()
+    return jsonify(response.data)
+
+@app.route("/message", methods=["GET"])
+def get_messages():
+    response = supabase.table("message").select("*").execute()
+    return jsonify(response.data)
+
+@app.route("/message", methods=["POST"])
+def add_message():
+    data = request.get_json()
+    response = supabase.table("message").insert(data).execute()
+    return jsonify(response.data)
+
+@app.route("/message", methods=["DELETE"])
+def delete_message():
+    data = request.get_json()
+    response = supabase.table("message").delete().eq("id", data["id"]).execute()
+    return jsonify(response.data)
+
+@app.route("/chat", methods=["GET"])
+def get_chats():
+    response = supabase.table("chat").select("*").execute()
+    return jsonify(response.data)
+
+@app.route("/chat", methods=["POST"])
+def add_chat():
+    data = request.get_json()
+    response = supabase.table("chat").insert(data).execute()
+    return jsonify(response.data)
+
+@app.route("/chat", methods=["DELETE"])
+def delete_chat():
+    data = request.get_json()
+    response = supabase.table("chat").delete().eq("id", data["id"]).execute()
     return jsonify(response.data)
 
 if __name__ == '__main__':
