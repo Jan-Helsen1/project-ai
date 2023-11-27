@@ -1,0 +1,13 @@
+Ollama werkt enkel op wsl of MacOs
+
+1. Download ollama or curl https://ollama.ai/install.sh | sh
+2. "ollama serve" in terminal (use wsl)
+3. "ollama run samantha-mistral" in terminal
+4. "ollama create medmistral -f './Modelfile' " in terminal
+
+Wanneer er een post request binnenkomt voor een chat aan te maken, dan wordt
+er automatisch een conversatiechain aangemaakt van langchain.
+
+Met die conversatiechain word een llm meegegeven en memory,
+wanneer we dan een post request sturen voor message te uploaden
+dan gaat de conversatiechain een antwoord genereren.
